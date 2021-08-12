@@ -126,14 +126,11 @@ ordfEff = ordfEff[hitkeys]
 print('writing everything to file...')
 with open(foutSta, 'w') as fout:
     for i in range(len(ordfDru.iloc[0, :])):
-        # outstr = (str(ordfDru.keys()[i]) + ',' + str(ordfDru.iloc[1, i])
-        #           + ' ' + str(ordfDru.iloc[2, i])
-        #           + ' ' + str(ordfDru.iloc[3, i]))
         outstr = (str(ordfDru.keys()[i]) + ',' + str(ordfDru.iloc[1, i])
                   + ' ' + str(ordfDru.iloc[2, i])
-                  + ' ' + str(ordfDru.iloc[3, i]) + '\n')
+                  + ' ' + str(ordfDru.iloc[3, i])
+                  + ' ' + str(ordfDru.iloc[4, i]) + '\n')
         fout.write(outstr)
-        # print(ordfDru.keys()[i], (ordfDru.iloc[1, i]+ordfDru.iloc[2, i]+ordfDru.iloc[3, i]).replace(' ', ''))
 print('...done!\n')
 
 print('FIN')
