@@ -13,25 +13,12 @@
 # DESIRED FEATURES
 #  [none]
 
-import csv
+# import csv
+import intdeputil as idu
 
 # input and output file names
-finSta = 'data/out_mrclean/states_PI.csv'
+# idu.feaSt1 = 'data/out_mrclean/states_PI.csv'
 foutTmp = 'data/out_mrclean/states_PII.csv'
-
-
-def uncsvip(filename):
-    with open(filename, 'r', newline='\n') as fin:
-        reader = csv.reader(fin)
-        indata = list(reader)
-    fin.close()
-    lefty = []
-    righty = []
-    dlen = len(indata)
-    for i in range(dlen):
-        lefty.append(indata[i][0])
-        righty.append(indata[i][1])
-    return lefty, righty, dlen
 
 
 # split all the words up, account for overlaps (set), then sort
@@ -39,7 +26,9 @@ def vocit(alist):
     return sorted(set(word for sentence in alist for word in sentence.split()))
 
 
-liACH, liSta, stlen = uncsvip(finSta)
+ykk, stlen = idu.uncsvip(idu.feaSt1)
+liACH = ykk[0]
+liSta = ykk[1]
 
 vocabi = vocit(liSta)
 print(len(vocabi), vocabi)
