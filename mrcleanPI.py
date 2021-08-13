@@ -1,11 +1,11 @@
 #!/usr/bin/env python
-#  mrclean = initial data cleaning
-#  head -n 15 bigread.py
-#  python3 mrclean.py
+#  mrcleanPI = initial data cleaning, PART I
+#  head -n 15 mrcleanPI.py
+#  python3 mrcleanPI.py
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION
-#  reorganize the input data to a format that makes sense to me at least
+#  reorganize the input data to a format that makes sense (to me at least)
 #  output the overlapping data and some header info for later processing
 # NOTES
 #  [none]
@@ -23,7 +23,7 @@ finEff = 'data/input/CRISPR_gene_effect.csv'
 foutDru = 'data/out_mrclean/drug.csv'
 foutDep = 'data/out_mrclean/dependency.csv'
 foutEff = 'data/out_mrclean/effect.csv'
-foutSta = 'data/out_mrclean/states.csv'
+foutSta = 'data/out_mrclean/states_PI.csv'
 
 ldchr = 4             # to remove leading string 'ACH-' in depmap_id's
 depid1 = 'depmap_id'  # string for df keys
@@ -31,7 +31,6 @@ depid2 = 'DepMap_ID'  # alt -^-
 
 
 # ~~~ function definitions ~~~
-
 
 # ACHorg: check for mutually exlusive ACH-depmap_id's
 #  in:   listA = a list of ACH-depmap_id's
@@ -117,12 +116,6 @@ ordfEff = ordfEff[hitkeys]
 # print(ordfEff)
 
 # hmmm
-# print(type(ordfDru.keys()[0]))
-# print(type(ordfDru.iloc[1, 0]))
-# hmm = None
-# val = str(ordfDru.keys()[0]) + ',' + str(ordfDru.iloc[1, 0]) + '' + str(hmm)
-# print(val)
-# print(type(val))
 print('writing everything to file...')
 with open(foutSta, 'w') as fout:
     for i in range(len(ordfDru.iloc[0, :])):
@@ -132,6 +125,7 @@ with open(foutSta, 'w') as fout:
                   + ' ' + str(ordfDru.iloc[4, i]) + '\n')
         fout.write(outstr)
 print('...done!\n')
+
 
 print('FIN')
 exit(0)

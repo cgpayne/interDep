@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #  mrcluster = cluster analysis of initial data
-#  head -n 14 bigread.py
+#  head -n 14 mrcluster.py
 #  python3 mrcluster.py
 #  By:  Charlie Payne
 #  License: n/a
@@ -25,8 +25,22 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 
 # input and output file names
-finSta = 'data/out_mrclean/states.csv'
-foutTmp = 'mytmp.o'
+finSta = 'data/out_mrclean/states_PII.csv'
+foutTmp = 'tmp.o'
+
+
+def uncsvip(filename):
+    with open(filename, 'r', newline='\n') as fin:
+        reader = csv.reader(fin)
+        indata = list(reader)
+    fin.close()
+    lefty = []
+    righty = []
+    dlen = len(indata)
+    for i in range(dlen):
+        lefty.append(indata[i][0])
+        righty.append(indata[i][1])
+    return lefty, righty, dlen
 
 
 def labtally(labels, check):
@@ -37,35 +51,7 @@ def labtally(labels, check):
     return count
 
 
-with open(finSta, 'r', newline='\n') as fin:
-    reader = csv.reader(fin)
-    indata = list(reader)
-fin.close()
-liACH = []
-liSta = []
-dlen = len(indata)
-for i in range(dlen):
-    liACH.append(indata[i][0])
-    liSta.append(indata[i][1])
-
-# split all the words up, account for overlaps (set), then sort
-vocabi = sorted(set(word for sentence in liSta for word in sentence.split()))
-print(len(vocabi), vocabi)
-
-for i in range(dlen):
-    # HMMM (lack of domain knowledge): Antigen, Cell, Clear,
-    liSta[i] = liSta[i].replace('Basal ', 'Basal_')
-    liSta[i] = liSta[i].replace('Non ', 'Non_')
-    liSta[i] = liSta[i].replace('Soft ', 'Soft_')
-    liSta[i] = liSta[i].replace(' Amp', '_Amp')  # HMMM....
-    liSta[i] = liSta[i].replace('Central Nervous System', 'CNS')
-    liSta[i] = liSta[i].replace('Peripheral Nervous System', 'PNS')
-    liSta[i] = liSta[i].replace(' Grade', '_Grade')  # HMMM....
-    liSta[i] = liSta[i].replace('Upper ', 'Upper_')
-    liSta[i] = liSta[i].replace('Urinary Tract', 'Urinary_Tract')
-
-vocabf = sorted(set(word for sentence in liSta for word in sentence.split()))
-print(len(vocabf), vocabf)
+liACH, liSta, stlen = uncsvip(finSta)
 
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
 vec = TfidfVectorizer(stop_words=None)
@@ -148,16 +134,17 @@ plt.scatter(dfRF['x'], dfRF['y'], c=dfRF['DBSCAN_labels'],
             # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
 plt.title('DBSCAN Clustering', fontsize=18)
 # plt.legend(fontsize=20, loc='lower right', fancybox=False, edgecolor='black')
-plt.colorbar(ticks=[i for i in range(-1, dlen)])
+plt.colorbar(ticks=[i for i in range(-1, stlen)])
 plt.xlabel('Feature 1', fontsize=12)
 plt.ylabel('Feature 2', fontsize=12)
 plt.show()
 
 with open(foutTmp, 'w') as fout:
-    for i in range(dlen):
-        outstr = (liACH[i] + ', ' + str(dfRF['DBSCAN_labels'][i])
-                  + ', ' + liSta[i] + '\n')
+    for i in range(stlen):
+        outstr = (liACH[i] + ',' + str(dfRF['DBSCAN_labels'][i])
+                  + ',' + liSta[i] + '\n')
         fout.write(outstr)
+
 
 print('FIN')
 exit(0)

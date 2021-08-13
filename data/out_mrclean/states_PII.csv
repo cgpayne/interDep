@@ -1,0 +1,448 @@
+ACH-000001,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000007,Colorectal Colorectal Adenocarcinoma  
+ACH-000011,Urinary_Tract Bladder Carcinoma  
+ACH-000012,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000013,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000014,Skin Melanoma  
+ACH-000015,Lung NSCLC NSCLC Large Cell 
+ACH-000018,Urinary_Tract Bladder Carcinoma  
+ACH-000019,Breast Breast Carcinoma ERpos HER2neg Luminal
+ACH-000021,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000022,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000023,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000030,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000035,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000037,Soft_Tissue Thyroid Sarcoma  
+ACH-000040,CNS Glioma Astrocytoma 
+ACH-000041,Bone Ewing Sarcoma  EWS_FLI
+ACH-000042,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000047,Gastric Gastric Adenocarcinoma  
+ACH-000048,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000052,Bone Ewing Sarcoma  EWS_FLI
+ACH-000054,Soft_Tissue Fibrosarcoma  
+ACH-000060,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000075,CNS Glioma Astrocytoma 
+ACH-000078,PNS Neuroblastoma  MYCN_Amp
+ACH-000082,Bone Osteosarcoma  
+ACH-000085,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000086,Lung Mesothelioma  
+ACH-000087,Bone Ewing Sarcoma  EWS_FLI
+ACH-000092,Lung Mesothelioma  
+ACH-000093,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000096,Kidney Malignant Rhabdoid Tumor  
+ACH-000097,Breast Breast Ductal Carcinoma ERpos HER2neg Luminal
+ACH-000098,CNS Glioma Glioblastoma 
+ACH-000099,PNS Neuroblastoma  
+ACH-000108,Pancreas Exocrine Exocrine Adenosquamous 
+ACH-000114,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000116,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000118,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000120,PNS Neuroblastoma  MYCN_Amp
+ACH-000123,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000132,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000133,Fibroblast Fibroblast Soft_Tissue  
+ACH-000137,CNS Glioma Astrocytoma 
+ACH-000138,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000139,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000141,Bile Duct Gallbladder Adenocarcinoma  
+ACH-000142,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000147,Breast Breast Ductal Carcinoma ERpos HER2neg Luminal
+ACH-000149,PNS Neuroblastoma  
+ACH-000153,Lung Mesothelioma  
+ACH-000155,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000159,Kidney Renal Cell Carcinoma  
+ACH-000161,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000163,Thyroid Thyroid Squamous  
+ACH-000164,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000169,Soft_Tissue Rhabdomyosarcoma Embryonal 
+ACH-000172,Soft_Tissue Malignant Rhabdoid Tumor  
+ACH-000174,Thyroid Thyroid Carcinoma Anaplastic 
+ACH-000176,Lung NSCLC NSCLC Squamous 
+ACH-000178,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000182,Bile Duct Cholangiocarcinoma Extrahepatic 
+ACH-000188,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000189,Kidney Renal Cell Carcinoma  
+ACH-000192,Uterus Endometrial Adenocarcinoma  
+ACH-000200,CNS Glioma Glioblastoma 
+ACH-000207,Upper_Aerodigestive Upper_Aerodigestive Squamous Pharynx 
+ACH-000209,Bile Duct Cholangiocarcinoma Intrahepatic 
+ACH-000211,CNS Medulloblastoma  Non_MYC
+ACH-000212,Breast Breast Carcinoma ERneg HER2neg Basal_B
+ACH-000213,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000217,Liver Hepatocellular Carcinoma  
+ACH-000219,Skin Melanoma  
+ACH-000221,Liver Hepatocellular Carcinoma  
+ACH-000222,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000223,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_A
+ACH-000227,PNS Neuroblastoma  MYCN_Amp
+ACH-000228,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000231,CNS Glioma Glioblastoma 
+ACH-000232,CNS Glioma Astrocytoma 
+ACH-000234,Kidney Renal Cell Carcinoma Clear Cell 
+ACH-000235,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000237,Ovary Ovary Adenocarcinoma Mucinous 
+ACH-000243,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000244,CNS Glioma Glioblastoma 
+ACH-000249,Colorectal Colorectal Adenocarcinoma  
+ACH-000250,Kidney Renal Cell Carcinoma  
+ACH-000252,Colorectal Colorectal Adenocarcinoma  
+ACH-000255,Gastric Gastric Adenocarcinoma  
+ACH-000256,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000259,PNS Neuroblastoma  MYCN_Amp
+ACH-000260,PNS Neuroblastoma  
+ACH-000261,Lung NSCLC NSCLC Squamous 
+ACH-000264,Lung NSCLC  
+ACH-000265,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000266,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000269,CNS Glioma Glioblastoma 
+ACH-000273,CNS Glioma  
+ACH-000274,Skin Melanoma  
+ACH-000276,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_A
+ACH-000277,Breast Breast Ductal Carcinoma ERpos HER2pos HER2_Amp
+ACH-000278,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000279,Bone Ewing Sarcoma  EWS_FLI
+ACH-000280,Ovary Brenner Tumor  
+ACH-000281,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000288,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_B
+ACH-000291,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000292,Lung SCLC  
+ACH-000296,Colorectal Colorectal Adenocarcinoma  
+ACH-000302,Uterus Mullerian Carcinoma  
+ACH-000305,Esophagus Esophagus Squamous  
+ACH-000307,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000308,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000311,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000312,PNS Neuroblastoma  MYCN_Amp
+ACH-000316,Liver Hepatocellular Carcinoma  
+ACH-000318,Esophagus Esophagus Squamous  
+ACH-000319,Lung Mesothelioma  
+ACH-000320,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000322,Skin Melanoma  
+ACH-000323,CNS Glioma Astrocytoma 
+ACH-000324,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000329,CNS Glioma Astrocytoma 
+ACH-000330,Breast Breast Ductal Carcinoma ERpos HER2neg Luminal
+ACH-000331,Lung Mesothelioma  
+ACH-000332,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000335,Lung Mesothelioma  
+ACH-000341,PNS Neuroblastoma  
+ACH-000343,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000344,Gastric Gastric Adenocarcinoma Diffuse Gastric 
+ACH-000348,Skin Melanoma  
+ACH-000350,Colorectal Colorectal Adenocarcinoma  
+ACH-000352,Breast Breast Carcinoma ERpos HER2neg Luminal
+ACH-000356,Gastric Gastric Adenocarcinoma Diffuse Gastric 
+ACH-000361,Liver Hepatocellular Carcinoma  
+ACH-000364,Bone Osteosarcoma  
+ACH-000366,PNS Neuroblastoma  MYCN_Amp
+ACH-000367,Lung NSCLC NSCLC Squamous 
+ACH-000368,CNS Glioma Glioblastoma 
+ACH-000374,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_A
+ACH-000375,Soft_Tissue Malignant Rhabdoid Tumor Renal Leiomyoblastoma 
+ACH-000376,CNS Glioma Glioblastoma 
+ACH-000378,Lung NSCLC NSCLC Adenosquamous 
+ACH-000383,Esophagus Esophagus Adenocarcinoma  
+ACH-000389,CNS Glioma  
+ACH-000390,Lung NSCLC NSCLC Squamous 
+ACH-000391,Bone Ewing Sarcoma  EWS_FLI
+ACH-000393,Liver Hepatocellular Carcinoma  
+ACH-000395,Lung NSCLC NSCLC Squamous 
+ACH-000397,Uterus Clear Cell Carcinoma  
+ACH-000401,Skin Melanoma  
+ACH-000403,Colorectal Colorectal Adenocarcinoma  
+ACH-000404,Skin Melanoma  
+ACH-000407,Uterus MMMT  
+ACH-000408,Esophagus Esophagus Squamous  
+ACH-000411,Kidney Renal Cell Carcinoma Clear Cell 
+ACH-000414,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000415,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000416,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000417,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000420,Liver Hepatocellular Carcinoma  
+ACH-000421,Colorectal Colorectal Adenocarcinoma  
+ACH-000425,Skin Melanoma  
+ACH-000427,Gastric Gastric Adenocarcinoma Tubular 
+ACH-000430,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000433,Kidney Renal Cell Carcinoma Clear Cell 
+ACH-000434,Lung NSCLC NSCLC Large Cell 
+ACH-000435,Uterus Endometrial Adenocarcinoma  
+ACH-000437,CNS Glioma Astrocytoma 
+ACH-000441,Skin Melanoma  
+ACH-000444,Lung NSCLC NSCLC Large Cell 
+ACH-000445,CNS Glioma Glioblastoma 
+ACH-000450,Skin Melanoma  
+ACH-000452,Esophagus Esophagus Squamous  
+ACH-000454,Lung NSCLC NSCLC Squamous 
+ACH-000458,Skin Melanoma  
+ACH-000461,Bile Duct Cholangiocarcinoma Extrahepatic 
+ACH-000463,Lung NSCLC NSCLC Large Cell 
+ACH-000464,CNS Glioma Glioblastoma 
+ACH-000466,Gastric Gastric Adenocarcinoma Tubular 
+ACH-000467,Colorectal Colorectal Adenocarcinoma  
+ACH-000468,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000469,CNS Glioma Glioblastoma 
+ACH-000470,Colorectal Colorectal Adenocarcinoma  
+ACH-000471,Liver   
+ACH-000472,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000473,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000475,Liver Hepatocellular Carcinoma HBs Antigen Carrier 
+ACH-000476,Liver Hepatocellular Carcinoma  
+ACH-000477,Skin Melanoma  
+ACH-000480,Liver Hepatocellular Carcinoma  
+ACH-000481,Lung NSCLC NSCLC Squamous 
+ACH-000483,Liver Hepatocellular Carcinoma  
+ACH-000484,Kidney Renal Cell Carcinoma  
+ACH-000485,Gastric Gastric Adenocarcinoma  
+ACH-000486,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000488,Esophagus Esophagus Squamous  
+ACH-000493,Liver Hepatocellular Carcinoma  
+ACH-000495,Kidney Renal Cell Carcinoma  
+ACH-000496,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000499,Bone Ewing Sarcoma  EWS_FLI
+ACH-000500,Upper_Aerodigestive Upper_Aerodigestive Squamous Laryngeal 
+ACH-000502,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000503,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000504,CNS Glioma  
+ACH-000505,Soft_Tissue Leiomyosarcoma  
+ACH-000507,Gastric Gastric Adenocarcinoma  
+ACH-000510,Lung NSCLC NSCLC Large Cell 
+ACH-000516,Bone Chondrosarcoma  
+ACH-000517,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000518,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000521,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000524,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000527,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000528,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000532,Colorectal Colorectal Adenocarcinoma  
+ACH-000533,Soft_Tissue Malignant Rhabdoid Tumor  
+ACH-000535,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000537,Liver Hepatocellular Carcinoma  
+ACH-000542,Ovary Ovary Adenocarcinoma Low_Grade Serous 
+ACH-000544,Esophagus Esophagus Squamous  
+ACH-000545,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000547,Urinary_Tract Bladder Carcinoma  
+ACH-000548,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000549,Upper_Aerodigestive Upper_Aerodigestive Squamous Laryngeal 
+ACH-000552,Colorectal Colorectal Adenocarcinoma  
+ACH-000558,CNS Glioma Glioblastoma 
+ACH-000561,Esophagus Esophagus Squamous  
+ACH-000562,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000563,Lung NSCLC NSCLC Squamous 
+ACH-000565,Colorectal Colorectal Adenocarcinoma  
+ACH-000570,CNS Glioma Glioblastoma 
+ACH-000571,CNS Glioma Glioblastoma 
+ACH-000573,Breast Breast Carcinoma ERneg HER2neg Basal_B
+ACH-000579,Skin Melanoma  
+ACH-000580,Skin Melanoma Amelanotic 
+ACH-000587,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000589,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000592,CNS Glioma  
+ACH-000593,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000595,CNS Glioma Glioblastoma 
+ACH-000599,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000601,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000605,Esophagus Esophagus Squamous  
+ACH-000608,Ovary Ovary Adenocarcinoma Mucinous 
+ACH-000609,CNS Glioma Astrocytoma 
+ACH-000614,Skin Melanoma  
+ACH-000616,Gastric Gastric Adenocarcinoma  
+ACH-000618,Upper_Aerodigestive Upper_Aerodigestive Squamous Hypopharyngeal 
+ACH-000619,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000620,Liver Hepatocellular Carcinoma  
+ACH-000622,CNS Glioma Glioblastoma 
+ACH-000623,CNS Glioma Glioblastoma 
+ACH-000624,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_A
+ACH-000627,Lung NSCLC NSCLC Large Cell 
+ACH-000630,Upper_Aerodigestive Upper_Aerodigestive Squamous Tongue 
+ACH-000632,Skin Melanoma  
+ACH-000637,Esophagus Esophagus Squamous  
+ACH-000638,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000645,Lung Mesothelioma  
+ACH-000647,Esophagus Esophagus Squamous  
+ACH-000648,Lung Mesothelioma  
+ACH-000649,Kidney Renal Cell Carcinoma Clear Cell 
+ACH-000651,Colorectal Colorectal Adenocarcinoma  
+ACH-000652,Pancreas Exocrine Exocrine Adenocarcinoma 
+ACH-000657,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000661,Skin Melanoma  
+ACH-000662,Lung NSCLC NSCLC Large Cell 
+ACH-000663,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000665,Lung NSCLC NSCLC Squamous 
+ACH-000666,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000667,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000671,Liver Hepatoblastoma  
+ACH-000677,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000680,Colorectal Colorectal Adenocarcinoma  
+ACH-000681,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000682,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000684,Kidney Renal Cell Carcinoma Clear Cell 
+ACH-000685,Pancreas Exocrine Exocrine Adenosquamous 
+ACH-000688,Ovary Ovary Adenocarcinoma Mixed Serous Clear Cell 
+ACH-000693,Esophagus Esophagus Squamous  
+ACH-000694,Esophagus Esophagus Squamous  
+ACH-000696,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000698,Lung SCLC  
+ACH-000699,Breast Breast Ductal Carcinoma ERneg HER2neg Basal_B
+ACH-000701,Ovary Ovary Adenocarcinoma Mucinous 
+ACH-000704,Ovary Ovary Carcinoma  
+ACH-000706,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000711,Breast Breast Ductal Carcinoma ERneg HER2pos Basal_A
+ACH-000713,Ovary Ovary Adenocarcinoma High_Grade Serous 
+ACH-000717,Esophagus Esophagus Squamous  
+ACH-000719,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000720,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000721,Breast Breast Carcinoma ERneg HER2neg Basal_B
+ACH-000724,Urinary_Tract Bladder Carcinoma  
+ACH-000732,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000734,Liver Hepatocellular Carcinoma  
+ACH-000735,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000736,Gastric Gastric Adenocarcinoma Signet Ring Cell 
+ACH-000738,CNS Glioma Glioblastoma 
+ACH-000739,Liver Hepatocellular Carcinoma  
+ACH-000740,Upper_Aerodigestive Upper_Aerodigestive Squamous Salivary Gland 
+ACH-000747,Lung NSCLC NSCLC Squamous 
+ACH-000748,Bone Osteosarcoma  
+ACH-000753,Urinary_Tract Bladder Carcinoma  
+ACH-000756,CNS Glioma Glioblastoma 
+ACH-000758,Gastric Gastric Adenocarcinoma  
+ACH-000762,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000764,Gastric Gastric Adenocarcinoma Mucinous 
+ACH-000765,Skin Melanoma  
+ACH-000766,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000768,Breast Breast Carcinoma ERneg HER2neg Basal_B
+ACH-000769,Lung NSCLC NSCLC Squamous 
+ACH-000771,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000774,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000775,Lung Lung Carcinoid  
+ACH-000776,CNS Medulloblastoma  Non_MYC
+ACH-000777,Esophagus Esophagus Squamous  
+ACH-000778,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000781,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000783,Breast Breast Carcinoma ERpos HER2neg Luminal
+ACH-000784,Esophagus Esophagus Squamous  
+ACH-000785,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000787,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000788,Skin Melanoma  
+ACH-000791,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000792,Kidney Renal Cell Carcinoma Transitional Cell 
+ACH-000794,Upper_Aerodigestive Upper_Aerodigestive Squamous Oral 
+ACH-000796,Ovary Ovary Adenocarcinoma Mucinous 
+ACH-000800,Lung SCLC  
+ACH-000802,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000804,PNS Neuroblastoma  MYCN_Amp
+ACH-000805,Skin Melanoma  
+ACH-000809,Esophagus Esophagus Squamous  
+ACH-000810,Skin Melanoma  
+ACH-000811,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000814,Skin Melanoma  
+ACH-000819,CNS Glioma Glioblastoma 
+ACH-000822,Skin Melanoma  
+ACH-000823,Esophagus Esophagus Squamous  
+ACH-000824,Esophagus Esophagus Squamous  
+ACH-000826,Lung NSCLC  
+ACH-000827,Skin Melanoma  
+ACH-000832,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000833,Soft_Tissue Rhabdomyosarcoma Alveolar 
+ACH-000834,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000835,Soft_Tissue Pleomorphic Sarcoma  
+ACH-000836,Upper_Aerodigestive Upper_Aerodigestive Squamous Tongue 
+ACH-000837,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000839,Urinary_Tract Bladder Carcinoma Bladder Squamous 
+ACH-000840,Lung NSCLC NSCLC Adenosquamous 
+ACH-000841,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000843,Lung NSCLC NSCLC Squamous 
+ACH-000845,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000846,Upper_Aerodigestive Upper_Aerodigestive Squamous  
+ACH-000847,Gastric Gastric Adenocarcinoma  
+ACH-000848,Liver Hepatocellular Carcinoma  
+ACH-000849,Breast Breast Carcinoma ERneg HER2neg Basal_A
+ACH-000853,Lung NSCLC NSCLC Large Cell 
+ACH-000855,Esophagus Esophagus Squamous  
+ACH-000856,Breast Breast Carcinoma ERneg HER2neg Basal_B
+ACH-000858,Lung NSCLC NSCLC Squamous 
+ACH-000859,Breast Breast Ductal Carcinoma ERneg HER2pos Basal_A
+ACH-000860,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000862,Urinary_Tract Bladder Carcinoma  
+ACH-000863,CNS Glioma Glioblastoma 
+ACH-000866,Lung SCLC  
+ACH-000869,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000873,Esophagus Esophagus Squamous  
+ACH-000878,Lung NSCLC NSCLC Squamous 
+ACH-000879,Uterus Endometrial Adenocarcinoma  
+ACH-000880,Gastric Gastric Adenocarcinoma  
+ACH-000881,Skin Melanoma  
+ACH-000882,Skin Melanoma  
+ACH-000884,Skin Melanoma Amelanotic 
+ACH-000885,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000886,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000888,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000890,Lung SCLC  
+ACH-000896,Urinary_Tract Bladder Carcinoma  
+ACH-000898,Gastric Gastric Adenocarcinoma Tubular 
+ACH-000899,Skin Melanoma  
+ACH-000900,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000901,Lung NSCLC NSCLC Large Cell 
+ACH-000903,Thyroid Thyroid Carcinoma Anaplastic 
+ACH-000905,Urinary_Tract Bladder Carcinoma  
+ACH-000906,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000911,Gastric Gastric Adenocarcinoma  
+ACH-000913,Uterus Endometrial Stromal Sarcoma  
+ACH-000915,Skin Melanoma  
+ACH-000916,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000917,Esophagus Esophagus Squamous  
+ACH-000919,Gastric Gastric Adenocarcinoma  
+ACH-000921,Lung SCLC  
+ACH-000924,Lung NSCLC  
+ACH-000926,Colorectal Colorectal Adenocarcinoma  
+ACH-000929,Lung NSCLC  
+ACH-000934,Breast Breast Carcinoma ERpos HER2pos HER2_Amp
+ACH-000936,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000939,Soft_Tissue Leiomyosarcoma  
+ACH-000941,Uterus Endometrial Adenocarcinoma  
+ACH-000943,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000945,Lung NSCLC NSCLC Adenocarcinoma 
+ACH-000946,Uterus Endometrial Adenocarcinoma  
+ACH-000947,Ovary Ovary Adenocarcinoma Endometrioid 
+ACH-000948,Gastric Gastric Adenocarcinoma  
+ACH-000950,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000956,Prostate Prostate Adenocarcinoma  
+ACH-000957,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000958,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000959,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000961,Uterus Endometrial Adenocarcinoma  
+ACH-000962,Ovary Ovary Adenocarcinoma Clear Cell 
+ACH-000963,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000965,Uterus Endometrial Adenosquamous  
+ACH-000966,Ovary Ovary Adenocarcinoma Mixed Endometrioid Clear Cell 
+ACH-000968,Skin Melanoma  
+ACH-000970,Colorectal Colorectal Adenocarcinoma  
+ACH-000971,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000973,Urinary_Tract Bladder Carcinoma Bladder Transitional Cell 
+ACH-000974,Uterus Endometrial Adenocarcinoma  
+ACH-000976,Bile Duct Cholangiocarcinoma Intrahepatic 
+ACH-000977,Prostate Prostate Adenocarcinoma  
+ACH-000978,Uterus Endometrial Adenocarcinoma  
+ACH-000979,Prostate Prostate Adenocarcinoma  
+ACH-000984,Uterus Endometrial Adenocarcinoma  
+ACH-000985,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-000986,Colorectal Colorectal Adenocarcinoma  
+ACH-000988,Uterus Endometrial Adenocarcinoma  
+ACH-000991,Colorectal Colorectal Adenocarcinoma  
+ACH-000994,Uterus Endometrial Adenocarcinoma  
+ACH-000996,Uterus Endometrial Adenocarcinoma  
+ACH-000997,Colorectal Colorectal Adenocarcinoma  MSI
+ACH-001016,CNS Glioma  
+ACH-001075,Lung NSCLC NSCLC Mucoepidermoid 
+ACH-001099,Soft_Tissue Malignant Rhabdoid Tumor  
+ACH-001145,Ovary Ovary Adenocarcinoma Serous 
+ACH-001163,Kidney Renal Cell Carcinoma Renal Medullary Carcinoma 
+ACH-001164,Soft_Tissue Undifferentiated Sarcoma  
+ACH-001190,Skin Melanoma  
+ACH-001192,Bone Ewing Sarcoma  EWS_FLI
+ACH-001193,Bone Ewing Sarcoma  EWS_FLI
+ACH-001205,Bone Ewing Sarcoma  EWS_FLI
+ACH-001211,Soft_Tissue Malignant Rhabdoid Tumor  
+ACH-001212,Soft_Tissue Malignant Rhabdoid Tumor  
+ACH-001239,Skin Melanoma  
+ACH-001306,Thyroid Thyroid Carcinoma  
+ACH-001318,Liver Hepatocellular Carcinoma  
