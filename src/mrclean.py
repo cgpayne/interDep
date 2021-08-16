@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#  mrcleanPI = initial data cleaning, PART I
-#  head -n 15 mrcleanPI.py
-#  python3 mrcleanPI.py
+#  mrclean = initial data cleaning, PART I (Mr. Clean, Mr. Clean, Mr. Clean!)
+#  head -n 15 mrclean.py
+#  python3 mrclean.py
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION

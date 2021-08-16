@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#  mrcluster = cluster analysis of initial data
-#  head -n 14 mrcluster.py
-#  python3 mrcluster.py
+#  honeyoats = cluster analysis of initial data (honey + oats = clusters)
+#  head -n 14 honeyoats.py
+#  python3 honeyoats.py
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION
@@ -23,7 +23,7 @@ from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
-import intdeputil as idu
+import intdep_util as idu
 
 # input and output file names
 foutTmp = 'tmp.o'

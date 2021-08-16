@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#  mrcleanPII = initial data cleaning, PART II
-#  head -n 14 mrcleanPII.py
-#  python3 mrcleanPII.py
+#  mrsinatra = initial data cleaning, PART II
+#  head -n 14 mrsinatra.py
+#  python3 mrsinatra.py
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION
@@ -14,11 +14,11 @@
 #  [none]
 
 # import csv
-import intdeputil as idu
+import intdep_util as idu
 
 # input and output file names
 # idu.feaSt1 = 'data/out_mrclean/states_PI.csv'
-foutTmp = 'data/out_mrclean/states_PII.csv'
+foutTmp = 'data/out_mister/states_mrsinatra.csv'
 
 
 # split all the words up, account for overlaps (set), then sort

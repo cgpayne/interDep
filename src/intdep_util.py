@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#  intdeputil = interDep utilities module
-#  head -n 14 intdeputil.py
-#  python3: import intdeputil as idu
+#  intdep_util = interDep utilities module
+#  head -n 14 intdep_util.py
+#  python3: import intdep_util as idu
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION
@@ -16,8 +16,9 @@
 import csv
 
 # data directory names
-ddin = 'data/input/'
-ddea = 'data/out_mrclean/'
+ddin = '../data/input/'
+ddea = '../data/out_mister/'
+
 
 # data file names
 finDru = ddin + 'Drug_sensitivity_(PRISM_Repurposing_Primary_Screen)_19Q4.csv'
@@ -26,8 +27,8 @@ finEff = ddin + 'CRISPR_gene_effect.csv'
 feaDru = ddea + 'drug.csv'
 feaDep = ddea + 'dependency.csv'
 feaEff = ddea + 'effect.csv'
-feaSt1 = ddea + 'states_PI.csv'
-feaSt2 = ddea + 'states_PII.csv'
+feaSt1 = ddea + 'states_mrclean.csv'
+feaSt2 = ddea + 'states_mrsinatra.csv'
 
 
 # ~~~ function definitions ~~~
