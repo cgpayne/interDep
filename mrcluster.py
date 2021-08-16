@@ -23,9 +23,9 @@ from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
+import intdeputil as idu
 
 # input and output file names
-finSta = 'data/out_mrclean/states_PII.csv'
 foutTmp = 'tmp.o'
 
 
@@ -51,7 +51,7 @@ def labtally(labels, check):
     return count
 
 
-liACH, liSta, stlen = uncsvip(finSta)
+liACH, liSta, stlen = uncsvip(idu.feaSt2)
 
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
 vec = TfidfVectorizer(stop_words=None)
@@ -78,19 +78,19 @@ dfRF = pd.DataFrame(liRF, columns=['x', 'y'])
 # print(dfRF)
 # exit()
 
-# neigh = NearestNeighbors(n_neighbors=2)
-# nbrs = neigh.fit(dfRF)
-# distances, indices = nbrs.kneighbors(dfRF)
-#
-# distances = np.sort(distances, axis=0)
-# distances = distances[:, 1]
-# plt.figure(figsize=(7, 7))
-# plt.plot(distances)
-# plt.title('K-distance Graph', fontsize=18)
-# plt.xlabel('Data Points sorted by distance', fontsize=12)
-# plt.ylabel('Epsilon', fontsize=12)
-# plt.show()
-# exit()
+neigh = NearestNeighbors(n_neighbors=2)
+nbrs = neigh.fit(dfRF)
+distances, indices = nbrs.kneighbors(dfRF)
+
+distances = np.sort(distances, axis=0)
+distances = distances[:, 1]
+plt.figure(figsize=(7, 7))
+plt.plot(distances)
+plt.title('K-distance Graph', fontsize=18)
+plt.xlabel('Data Points sorted by distance', fontsize=12)
+plt.ylabel('Epsilon', fontsize=12)
+plt.show()
+exit()
 
 imin = 0.003
 imax = 0.012
