@@ -11,7 +11,7 @@
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
-#  [none]
+#  -- somehow split the state strings?
 
 # import csv
 import numpy as np
@@ -54,7 +54,7 @@ def labtally(labels, check):
     return count
 
 
-def secordcen(i, fndat):
+def secordcen(i, fndat, di):
     if i < 1:
         eprint('ERROR 041: i is too low!')
         eprint('i =', i)
@@ -66,7 +66,18 @@ def secordcen(i, fndat):
         eprint('exiting...')
         exit(1)
     else:
-        return fndat[i+1] - 2*fndat[i] + fndat[i]  # NOTE: h**2 = 1**2 = 1
+        slopeL = fndat[i] - fndat[i-1]  # run = i - (i-1) = 1
+        yyL = fndat[i] - slopeL*di
+        slopeR = fndat[i+1] - fndat[i]  # run = (i+1) - i = 1
+        yyR = slopeR*di + fndat[i]
+        return (yyR - 2*fndat[i] + yyL)/di**2
+
+
+def posifizer(alist):
+    for i in range(len(alist)):
+        if alist[i] < 0:
+            alist[i] = 0
+    return alist
 
 
 # # in:   X = real value, Xdat = array of ordered real values, Xlen = length of Xdat
@@ -162,9 +173,9 @@ plt.show()
 
 # pca = PCA(n_components=2, random_state=202108)
 # liRF = pca.fit_transform(dfVoc.values)  # reduced features
-# dfRF = pd.DataFrame(liRF, columns=['x', 'y'])
-# # print(dfRF)
-pca_new = PCA(n_components=0.80, random_state=202108)
+# dfred_states = pd.DataFrame(liRF, columns=['x', 'y'])
+# # print(dfred_states)
+pca_new = PCA(n_components=0.33, random_state=202108)
 # liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
 nared_states = pca_new.fit_transform(nati_states)  # reduced features
 dfred_states = pd.DataFrame(nared_states)
@@ -186,10 +197,14 @@ distances = list(distances[:, 1])  # HMMM...
 print(distances)
 print(len(distances))
 for i in range(390, 447):
-    print(i, secordcen(i, distances))
+    print(i, secordcen(i, distances, 1e-2))
 # lolz = max([secordcen(i, distances) for i in range(1, 447)])
 # print(lolz, int(np.where(distances == lolz)[0]))
-dmax, di = max((dmax, di) for (di, dmax) in enumerate(distances))
+ohmahgawd = posifizer([secordcen(i, distances, 1e-2) for i in range(1, 447)])
+ohmahgawd.insert(0, 0.0)
+ohmahgawd.append(0)
+print(ohmahgawd)
+dmax, di = max((dmax, di) for (di, dmax) in enumerate(ohmahgawd))
 print(dmax, di)
 plt.figure(figsize=(7, 7))
 plt.plot(distances)
@@ -197,37 +212,39 @@ plt.title('K-distance Graph', fontsize=18)
 plt.xlabel('Data Points sorted by distance', fontsize=12)
 plt.ylabel('Epsilon', fontsize=12)
 plt.show()
-exit()
+print(distances[400:430])
+# exit()
 
-imin = 0.01
-imax = 0.04
+imin = 0.005
+imax = 0.02
 istep = 0.001
 jmin = 4
-jmax = 12
+jmax = 10
 for epi in np.arange(imin, imax+istep, istep):
     if epi == imin:
         print('x.xxx:  ', end='')
     else:
-        print('{0:.3f}:  '.format(epi), end='')
+        print('{0:.4f}:  '.format(epi), end='')
     for msj in range(jmin, jmax+1):
         if epi == imin:
             print(msj, end='\t\t')
             continue
         dbscan = DBSCAN(eps=epi, min_samples=msj)
-        dbscan.fit(dfRF)
+        dbscan.fit(dfred_states)
         print('({0:d}, {1:d})'.format(max(dbscan.labels_) + 1,
               labtally(dbscan.labels_, -1)), end='\t')
         # print('{'+str(msj)+'}= '+str(max(dbscan.labels_) + 1), end='\t')
         # print('{\{0:d\}}= {1:d}'.format(msj, max(dbscan.labels_) + 1), end=',')
     print('')
+# exit()
 
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
-dbscan = DBSCAN(eps=0.03, min_samples=10)
-dbscan.fit(dfRF)
-dfRF['DBSCAN_labels'] = dbscan.labels_
+dbscan = DBSCAN(eps=0.015, min_samples=8)
+dbscan.fit(dfred_states)
+dfred_states['DBSCAN_labels'] = dbscan.labels_
 
-print(dfRF)
+print(dfred_states)
 
 # mycol = ['gray', 'red', 'green', 'blue']
 # mycol = ['gray', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']
@@ -236,20 +253,20 @@ mycol = acmap(np.arange(acmap.N))
 mycol = np.concatenate(([np.array([0.3, 0.3, 0.3, 1.0])], mycol))
 # print(mycol)
 
-plt.figure(figsize=(7, 7))
-plt.scatter(dfRF['x'], dfRF['y'], c=dfRF['DBSCAN_labels'],
-            cmap=matplotlib.colors.ListedColormap(mycol), s=15)
-            # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
-plt.title('DBSCAN Clustering', fontsize=18)
-# plt.legend(fontsize=20, loc='lower right', fancybox=False, edgecolor='black')
-plt.colorbar(ticks=[i for i in range(-1, stlen)])
-plt.xlabel('Feature 1', fontsize=12)
-plt.ylabel('Feature 2', fontsize=12)
-plt.show()
+# plt.figure(figsize=(7, 7))
+# plt.scatter(dfred_states['x'], dfred_states['y'], c=dfred_states['DBSCAN_labels'],
+#             cmap=matplotlib.colors.ListedColormap(mycol), s=15)
+#             # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
+# plt.title('DBSCAN Clustering', fontsize=18)
+# # plt.legend(fontsize=20, loc='lower right', fancybox=False, edgecolor='black')
+# plt.colorbar(ticks=[i for i in range(-1, stlen)])
+# plt.xlabel('Feature 1', fontsize=12)
+# plt.ylabel('Feature 2', fontsize=12)
+# plt.show()
 
 with open(foutTmp, 'w') as fout:
     for i in range(stlen):
-        outstr = (liACH[i] + ',' + str(dfRF['DBSCAN_labels'][i])
+        outstr = (liACH[i] + ',' + str(dfred_states['DBSCAN_labels'][i])
                   + ',' + liSta[i] + '\n')
         fout.write(outstr)
 
