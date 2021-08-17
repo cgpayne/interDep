@@ -51,6 +51,64 @@ def labtally(labels, check):
     return count
 
 
+def secordcen(i, fndat):
+    if i <= 1:
+        print('ERROR 041: i is too low!')
+        print('i =', i)
+        print('exiting...')
+        exit(1)
+    elif i >= len(fndat)-1:
+        print('ERROR 052: i is too high!')
+        print('i =', i)
+        print('exiting...')
+        exit(1)
+    else:
+        return fndat[i+1] - 2*fndat[i] + fndat[i]  # NOTE: h**2 = 1**2 = 1
+
+
+# # in:   X = real value, Xdat = array of ordered real values, Xlen = length of Xdat
+# # out:  i = i-th place, where X can be found between Xdat[i] and Xdat[i+1] (left justified), via bisection method
+# #           if X is too far left => return 'L', if X is too far right => return 'R'
+# def iXfind(X, Xdat):
+#   Xlen = len(Xdat)
+#   if X < Xdat[0]:
+#     i = 'L'
+#   elif Xdat[Xlen-1] == X:
+#     i = Xlen-2  # close off the right-most bracket, for completeness
+#   elif Xdat[Xlen-1] < X:
+#     i = 'R'
+#   else:
+#     a = 0
+#     c = Xlen-1
+#     hit = 0
+#     while hit == 0:
+#       b = (a + c)/2
+#       if (Xdat[a] <= X) and (X < Xdat[b]):  # it's in the left bracket
+#         if a == b-1:
+#           i = a  # left justified
+#           hit = 1
+#         else:
+#           c = b
+#       else:  # it's in the right bracket
+#         if b == c-1:
+#           i = b  # left justified
+#           hit = 1
+#         else:
+#           a = b
+#   return i
+#
+#
+# def trapdat(x, lidat):
+#     i = iXfind(x, lidat)
+#     yy = 0
+#     if i != 'L' and i != 'R':
+#         # slope = (lidat[i+1] - lidat[i])/(Nvec[i+1] - Nvec[i])
+#         slope = (lidat[i+1] - lidat[i])
+#         # yy = slope*(N - Nvec[i]) + lidat[i]
+#         yy = slope*(x - x//1) + lidat[i]
+
+
+
 liACH, liSta, stlen = uncsvip(idu.feaSt2)
 
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
@@ -84,19 +142,24 @@ distances, indices = nbrs.kneighbors(dfRF)
 
 distances = np.sort(distances, axis=0)
 distances = distances[:, 1]
+print(len(distances))
+for i in range(2, 446):
+    print(i, secordcen(i, distances))
+lolz = max([secordcen(i, distances) for i in range(2, 446)])
+print(lolz, np.where(distances == lolz))
 plt.figure(figsize=(7, 7))
 plt.plot(distances)
 plt.title('K-distance Graph', fontsize=18)
 plt.xlabel('Data Points sorted by distance', fontsize=12)
 plt.ylabel('Epsilon', fontsize=12)
 plt.show()
-exit()
+# exit()
 
-imin = 0.003
-imax = 0.012
+imin = 0.01
+imax = 0.04
 istep = 0.001
 jmin = 4
-jmax = 10
+jmax = 12
 for epi in np.arange(imin, imax+istep, istep):
     if epi == imin:
         print('x.xxx:  ', end='')
@@ -115,7 +178,8 @@ for epi in np.arange(imin, imax+istep, istep):
     print('')
 
 # (6, 4), (7, 5), (8, 6), ...
-dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
+# dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
+dbscan = DBSCAN(eps=0.03, min_samples=10)
 dbscan.fit(dfRF)
 dfRF['DBSCAN_labels'] = dbscan.labels_
 
