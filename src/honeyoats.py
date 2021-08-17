@@ -7,7 +7,7 @@
 # DESCRIPTION
 #  not sure yet
 # NOTES
-#  [none]
+#  -- it seems that scaling the TI-FIDF data worsens the PCA
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
@@ -23,6 +23,7 @@ from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
+# from sklearn.preprocessing import StandardScaler
 
 from intdep_util import feaSt2
 from intdep_util import eprint, uncsvip
@@ -54,7 +55,7 @@ def labtally(labels, check):
 
 
 def secordcen(i, fndat):
-    if i <= 1:
+    if i < 1:
         eprint('ERROR 041: i is too low!')
         eprint('i =', i)
         eprint('exiting...')
@@ -123,17 +124,34 @@ vec.fit(liSta)
 # print('GAH')
 # print(features.toarray())
 # exit()
-
-dfVoc = pd.DataFrame(vec.transform(liSta).toarray(),
-                     columns=sorted(vec.vocabulary_.keys()))
-print(dfVoc.values)
-print(dfVoc.values.shape)
-# print(dfVoc.keys())
+# dfVoc = pd.DataFrame(vec.transform(liSta).toarray(),
+#                      columns=sorted(vec.vocabulary_.keys()))
+# dfVoc = pd.DataFrame(vec.transform(liSta).toarray())
+# print(dfVoc)
+# print(type(dfVoc.values))
+# print(dfVoc.values.shape)
+# print('yyeeeee')
+# features = vec.transform(liSta).toarray()
+# print(type(features))
+# print(features)
+# print('WTF')
+# print(np.array(features))
+# print(type(np.array(features)))
+# # print(dfVoc.keys())
+nati_states = vec.transform(liSta).toarray()
 # exit()
+
+# made it worse!?
+# scaler = StandardScaler()
+# scaler.fit(nati_states)
+# natisc_states = scaler.transform(nati_states)
+# print(natisc_states)
+# # print(scX.shape)
 
 # check the running of the PCA!
 pca_tot = PCA(n_components=None, random_state=202108)
-pca_tot.fit_transform(dfVoc.values)
+# pca_tot.fit_transform(dfVoc.values)
+pca_tot.fit_transform(nati_states)
 print('variance captured by total = {0:.1f}'
       .format(100*sum(pca_tot.explained_variance_ratio_)))
 plt.plot(np.cumsum(pca_tot.explained_variance_ratio_))
@@ -146,31 +164,33 @@ plt.show()
 # liRF = pca.fit_transform(dfVoc.values)  # reduced features
 # dfRF = pd.DataFrame(liRF, columns=['x', 'y'])
 # # print(dfRF)
-pca_new = PCA(n_components=0.95, random_state=202108)
-liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
-dfRF = pd.DataFrame(liRF)
-print(dfRF)
-print(dfRF.values.shape)
+pca_new = PCA(n_components=0.80, random_state=202108)
+# liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
+nared_states = pca_new.fit_transform(nati_states)  # reduced features
+dfred_states = pd.DataFrame(nared_states)
+print(dfred_states)
+print(dfred_states.values.shape)
 print('variance captured by {0:d} = {1:.1f}%'
-      .format(dfRF.values.shape[1],
+      .format(dfred_states.values.shape[1],
               100*sum(pca_new.explained_variance_ratio_)))
 # exit()
 
 # should maybe test this?
 # https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
 neigh = NearestNeighbors(n_neighbors=2)
-nbrs = neigh.fit(dfRF)
-distances, indices = nbrs.kneighbors(dfRF)
+nbrs = neigh.fit(dfred_states)
+distances, indices = nbrs.kneighbors(dfred_states)
 
 distances = np.sort(distances, axis=0)
 distances = list(distances[:, 1])  # HMMM...
 print(distances)
 print(len(distances))
-for i in range(390, 448):
+for i in range(390, 447):
     print(i, secordcen(i, distances))
-lolz = max([secordcen(i, distances) for i in range(1, 448)])
+# lolz = max([secordcen(i, distances) for i in range(1, 447)])
 # print(lolz, int(np.where(distances == lolz)[0]))
-print(lolz, distances.index(lolz))
+dmax, di = max((dmax, di) for (di, dmax) in enumerate(distances))
+print(dmax, di)
 plt.figure(figsize=(7, 7))
 plt.plot(distances)
 plt.title('K-distance Graph', fontsize=18)
