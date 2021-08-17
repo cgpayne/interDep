@@ -13,7 +13,7 @@
 # DESIRED FEATURES
 #  [none]
 
-import csv
+# import csv
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
@@ -23,24 +23,26 @@ from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
-import intdep_util as idu
+
+from intdep_util import feaSt2
+from intdep_util import eprint, uncsvip
 
 # input and output file names
 foutTmp = 'tmp.o'
 
 
-def uncsvip(filename):
-    with open(filename, 'r', newline='\n') as fin:
-        reader = csv.reader(fin)
-        indata = list(reader)
-    fin.close()
-    lefty = []
-    righty = []
-    dlen = len(indata)
-    for i in range(dlen):
-        lefty.append(indata[i][0])
-        righty.append(indata[i][1])
-    return lefty, righty, dlen
+# def uncsvip(filename):
+#     with open(filename, 'r', newline='\n') as fin:
+#         reader = csv.reader(fin)
+#         indata = list(reader)
+#     fin.close()
+#     lefty = []
+#     righty = []
+#     dlen = len(indata)
+#     for i in range(dlen):
+#         lefty.append(indata[i][0])
+#         righty.append(indata[i][1])
+#     return lefty, righty, dlen
 
 
 def labtally(labels, check):
@@ -53,14 +55,14 @@ def labtally(labels, check):
 
 def secordcen(i, fndat):
     if i <= 1:
-        print('ERROR 041: i is too low!')
-        print('i =', i)
-        print('exiting...')
+        eprint('ERROR 041: i is too low!')
+        eprint('i =', i)
+        eprint('exiting...')
         exit(1)
     elif i >= len(fndat)-1:
-        print('ERROR 052: i is too high!')
-        print('i =', i)
-        print('exiting...')
+        eprint('ERROR 052: i is too high!')
+        eprint('i =', i)
+        eprint('exiting...')
         exit(1)
     else:
         return fndat[i+1] - 2*fndat[i] + fndat[i]  # NOTE: h**2 = 1**2 = 1
@@ -108,8 +110,9 @@ def secordcen(i, fndat):
 #         yy = slope*(x - x//1) + lidat[i]
 
 
-
-liACH, liSta, stlen = uncsvip(idu.feaSt2)
+ykk, stlen = uncsvip(feaSt2)
+liACH = ykk[0]
+liSta = ykk[1]
 
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
 vec = TfidfVectorizer(stop_words=None)
@@ -123,37 +126,58 @@ vec.fit(liSta)
 
 dfVoc = pd.DataFrame(vec.transform(liSta).toarray(),
                      columns=sorted(vec.vocabulary_.keys()))
-
 print(dfVoc.values)
-
+print(dfVoc.values.shape)
 # print(dfVoc.keys())
 # exit()
 
 # check the running of the PCA!
-pca = PCA(n_components=2, random_state=202108)
-liRF = pca.fit_transform(dfVoc.values)  # reduced features
-dfRF = pd.DataFrame(liRF, columns=['x', 'y'])
-# print(dfRF)
+pca_tot = PCA(n_components=None, random_state=202108)
+pca_tot.fit_transform(dfVoc.values)
+print('variance captured by total = {0:.1f}'
+      .format(100*sum(pca_tot.explained_variance_ratio_)))
+plt.plot(np.cumsum(pca_tot.explained_variance_ratio_))
+plt.xlabel('number of components')
+plt.ylabel('captured variance')
+plt.show()
 # exit()
 
+# pca = PCA(n_components=2, random_state=202108)
+# liRF = pca.fit_transform(dfVoc.values)  # reduced features
+# dfRF = pd.DataFrame(liRF, columns=['x', 'y'])
+# # print(dfRF)
+pca_new = PCA(n_components=0.95, random_state=202108)
+liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
+dfRF = pd.DataFrame(liRF)
+print(dfRF)
+print(dfRF.values.shape)
+print('variance captured by {0:d} = {1:.1f}%'
+      .format(dfRF.values.shape[1],
+              100*sum(pca_new.explained_variance_ratio_)))
+# exit()
+
+# should maybe test this?
+# https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
 neigh = NearestNeighbors(n_neighbors=2)
 nbrs = neigh.fit(dfRF)
 distances, indices = nbrs.kneighbors(dfRF)
 
 distances = np.sort(distances, axis=0)
-distances = distances[:, 1]
+distances = list(distances[:, 1])  # HMMM...
+print(distances)
 print(len(distances))
-for i in range(2, 446):
+for i in range(390, 448):
     print(i, secordcen(i, distances))
-lolz = max([secordcen(i, distances) for i in range(2, 446)])
-print(lolz, np.where(distances == lolz))
+lolz = max([secordcen(i, distances) for i in range(1, 448)])
+# print(lolz, int(np.where(distances == lolz)[0]))
+print(lolz, distances.index(lolz))
 plt.figure(figsize=(7, 7))
 plt.plot(distances)
 plt.title('K-distance Graph', fontsize=18)
 plt.xlabel('Data Points sorted by distance', fontsize=12)
 plt.ylabel('Epsilon', fontsize=12)
 plt.show()
-# exit()
+exit()
 
 imin = 0.01
 imax = 0.04

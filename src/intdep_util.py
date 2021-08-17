@@ -13,7 +13,9 @@
 # DESIRED FEATURES
 #  [none]
 
+from __future__ import print_function
 import csv
+import sys
 
 # data directory names
 ddin = '../data/input/'
@@ -32,6 +34,11 @@ feaSt2 = ddea + 'states_mrsinatra.csv'
 
 
 # ~~~ function definitions ~~~
+
+def eprint(*args, **kwargs):
+    sys.stdout.flush()  # so stederr doesn't redirect to top of file with 2>&1
+    print(*args, file=sys.stderr, **kwargs)
+
 
 # def uncsvip(filename):
 #     with open(filename, 'r', newline='\n') as fin:
