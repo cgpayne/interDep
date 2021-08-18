@@ -14,6 +14,8 @@
 # DESIRED FEATURES
 #  [none]
 
+import sys
+
 import pandas as pd
 
 from intdep_util import finDru, finDep, finEff, feaDru, feaDep, feaEff, fclSt1
@@ -121,5 +123,5 @@ print('...done!\n')
 
 
 print('FIN')
-exit(0)
+sys.exit(0)
 # FIN

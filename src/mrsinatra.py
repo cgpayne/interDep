@@ -14,6 +14,8 @@
 #  [none]
 
 # import csv
+import sys
+
 # import intdep_util as idu
 from intdep_util import fclSt1, fsiSt2
 from intdep_util import uncsvip
@@ -64,5 +66,5 @@ fout.close()
 
 
 print('FIN')
-exit(0)
+sys.exit(0)
 # FIN

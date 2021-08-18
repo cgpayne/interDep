@@ -14,6 +14,8 @@
 #  -- somehow split the state strings?
 
 # import csv
+import sys
+
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
@@ -60,12 +62,12 @@ def secordcen(i, fndat, di):
         eprint('ERROR 041: i is too low!')
         eprint('i =', i)
         eprint('exiting...')
-        exit(1)
+        sys.exit(1)
     elif i >= len(fndat)-1:
         eprint('ERROR 052: i is too high!')
         eprint('i =', i)
         eprint('exiting...')
-        exit(1)
+        sys.exit(1)
     else:
         slopeL = fndat[i] - fndat[i-1]  # run = i - (i-1) = 1
         yyL = fndat[i] - slopeL*di
@@ -136,7 +138,7 @@ vec.fit(liCan)
 # print(features)
 # print('GAH')
 # print(features.toarray())
-# exit()
+# sys.exit()
 # dfVoc = pd.DataFrame(vec.transform(liCan).toarray(),
 #                      columns=sorted(vec.vocabulary_.keys()))
 # dfVoc = pd.DataFrame(vec.transform(liCan).toarray())
@@ -152,7 +154,7 @@ vec.fit(liCan)
 # print(type(np.array(features)))
 # # print(dfVoc.keys())
 nati_states = vec.transform(liCan).toarray()
-# exit()
+# sys.exit()
 
 # made it worse!?
 # scaler = StandardScaler()
@@ -171,7 +173,7 @@ plt.plot(np.cumsum(pca_tot.explained_variance_ratio_))
 plt.xlabel('number of components')
 plt.ylabel('captured variance')
 plt.show()
-# exit()
+# sys.exit()
 
 # pca = PCA(n_components=2, random_state=202108)
 # liRF = pca.fit_transform(dfVoc.values)  # reduced features
@@ -187,7 +189,7 @@ print(dfred_states.values.shape)
 print('variance captured by {0:d} = {1:.1f}%'
       .format(dfred_states.values.shape[1],
               100*sum(pca_new.explained_variance_ratio_)))
-# exit()
+# sys.exit()
 
 # should maybe test this?
 # https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
@@ -218,7 +220,7 @@ plt.xlabel('Data Points sorted by distance', fontsize=12)
 plt.ylabel('Epsilon', fontsize=12)
 plt.show()
 print(distances[400:430])
-# exit()
+# sys.exit()
 
 imin = 0.002
 imax = 0.03
@@ -241,7 +243,7 @@ for epi in np.arange(imin, imax+istep, istep):
         # print('{'+str(msj)+'}= '+str(max(dbscan.labels_) + 1), end='\t')
         # print('{\{0:d\}}= {1:d}'.format(msj, max(dbscan.labels_) + 1), end=',')
     print('')
-# exit()
+# sys.exit()
 
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
@@ -276,11 +278,11 @@ print('wtf2')
 # dfnew.insert(1, 'Can', liCan, True)
 dfnew = pd.concat([dfnew, pd.DataFrame(liCan, columns=['Can'])], axis=1)
 # print(dfnew)
-# exit()
+# sys.exit()
 print('wtf3')
 dfnew = dfnew.sort_values(by='DBSCAN_labels', ignore_index=True)
 # print(dfnew)
-# exit()
+# sys.exit()
 print('wtf4')
 for i in range(dfnew.shape[0]):
     dblab = dfnew.loc[i, 'DBSCAN_labels']
@@ -299,5 +301,5 @@ with open(foutTmp, 'w') as fout:
 
 
 print('FIN')
-exit(0)
+sys.exit(0)
 # FIN
