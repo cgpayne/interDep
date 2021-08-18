@@ -16,14 +16,7 @@
 
 import pandas as pd
 
-# input and output file names
-finDru = 'data/input/Drug_sensitivity_(PRISM_Repurposing_Primary_Screen)_19Q4.csv'
-finDep = 'data/input/CRISPR_gene_dependency_Chronos.csv'
-finEff = 'data/input/CRISPR_gene_effect.csv'
-foutDru = 'data/out_mrclean/drug.csv'
-foutDep = 'data/out_mrclean/dependency.csv'
-foutEff = 'data/out_mrclean/effect.csv'
-foutSta = 'data/out_mrclean/states_PI.csv'
+from intdep_util import finDru, finDep, finEff, feaDru, feaDep, feaEff, feaSt1
 
 ldchr = 4             # to remove leading string 'ACH-' in depmap_id's
 depid1 = 'depmap_id'  # string for df keys
@@ -76,13 +69,13 @@ with open(finEff, 'r') as fin:
 fin.close()
 print('~~~~ data from: {0:s}'.format(finDru))
 print(dfDru)
-print('\n\n')
+print('\n')
 print('~~~~ data from: {0:s}'.format(finDep))
 print(dfDep)
-print('\n\n')
+print('\n')
 print('~~~~ data from: {0:s}'.format(finEff))
 print(dfEff)
-print('\n\n')
+print('\n')
 
 # find the mutually exclusive depmap_id's
 hitDruDep = ACHorg(dfDru[depid1], dfDep[depid2])
@@ -117,7 +110,7 @@ ordfEff = ordfEff[hitkeys]
 
 # hmmm
 print('writing everything to file...')
-with open(foutSta, 'w') as fout:
+with open(feaSt1, 'w') as fout:
     for i in range(len(ordfDru.iloc[0, :])):
         outstr = (str(ordfDru.keys()[i]) + ',' + str(ordfDru.iloc[1, i])
                   + ' ' + str(ordfDru.iloc[2, i])

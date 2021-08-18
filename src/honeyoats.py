@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import matplotlib
 # from matplotlib import cm
 import pandas as pd
+from scipy.signal import savgol_filter
 from sklearn.cluster import DBSCAN
 from sklearn.decomposition import PCA
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -193,7 +194,9 @@ nbrs = neigh.fit(dfred_states)
 distances, indices = nbrs.kneighbors(dfred_states)
 
 distances = np.sort(distances, axis=0)
-distances = list(distances[:, 1])  # HMMM...
+# distances = list(distances[:, 1])  # HMMM...
+distances = np.array(distances[:, 1])  # HMMM...
+distances = savgol_filter(distances, 11, 3)
 print(distances)
 print(len(distances))
 for i in range(390, 447):
@@ -215,11 +218,11 @@ plt.show()
 print(distances[400:430])
 # exit()
 
-imin = 0.005
-imax = 0.02
+imin = 0.002
+imax = 0.03
 istep = 0.001
 jmin = 4
-jmax = 10
+jmax = 9
 for epi in np.arange(imin, imax+istep, istep):
     if epi == imin:
         print('x.xxx:  ', end='')
@@ -240,7 +243,7 @@ for epi in np.arange(imin, imax+istep, istep):
 
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
-dbscan = DBSCAN(eps=0.015, min_samples=8)
+dbscan = DBSCAN(eps=0.02, min_samples=6)
 dbscan.fit(dfred_states)
 dfred_states['DBSCAN_labels'] = dbscan.labels_
 
