@@ -12,13 +12,14 @@
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
-#  [none]
+#  -- finish printing all results to file
 
 import sys
 
 import pandas as pd
 
-from intdep_util import finDru, finDep, finEff, feaDru, feaDep, feaEff, fclSt1
+from intdep_util import fin_dru, fin_dep, fin_eff
+from intdep_util import fea_dru, fea_dep, fea_eff, fcl_st1
 
 ldchr = 4             # to remove leading string 'ACH-' in depmap_id's
 depid1 = 'depmap_id'  # string for df keys
@@ -60,34 +61,35 @@ def ACHtoint(alist):
 # --------- execute the code ---------
 
 # read in the data and output to screen to check
-with open(finDru, 'r') as fin:
-    dfDru = pd.read_csv(finDru, keep_default_na=False, low_memory=False)
+with open(fin_dru, 'r') as fin:
+    df_dru = pd.read_csv(fin_dru, keep_default_na=False, low_memory=False)
 fin.close()
-with open(finDep, 'r') as fin:
-    dfDep = pd.read_csv(finDep, keep_default_na=False, low_memory=False)
+with open(fin_dep, 'r') as fin:
+    df_dep = pd.read_csv(fin_dep, keep_default_na=False, low_memory=False)
 fin.close()
-with open(finEff, 'r') as fin:
-    dfEff = pd.read_csv(finEff, keep_default_na=False, low_memory=False)
+with open(fin_eff, 'r') as fin:
+    df_eff = pd.read_csv(fin_eff, keep_default_na=False, low_memory=False)
 fin.close()
-print('~~~~ data from: {0:s}'.format(finDru))
-print(dfDru)
+print('~~~~ data from: {0:s}'.format(fin_dru))
+print(df_dru)
 print('\n')
-print('~~~~ data from: {0:s}'.format(finDep))
-print(dfDep)
+print('~~~~ data from: {0:s}'.format(fin_dep))
+print(df_dep)
 print('\n')
-print('~~~~ data from: {0:s}'.format(finEff))
-print(dfEff)
+print('~~~~ data from: {0:s}'.format(fin_eff))
+print(df_eff)
 print('\n')
 
 # find the mutually exclusive depmap_id's
-hitDruDep = ACHorg(dfDru[depid1], dfDep[depid2])
-print('number of common ACH\'s found from dfDru and dfDep = {0:d}'
-      .format(len(hitDruDep)))
-print('loss = {0:d}'.format(abs(len(dfDru[depid1]) - len(dfDep[depid2]))))
-hitf = ACHorg(hitDruDep, dfEff[depid2])
-print('number of common ACH\'s found from above result and dfEff = {0:d}'
+hit_drudep = ACHorg(df_dru[depid1], df_dep[depid2])
+print('number of common ACH\'s found from df_dru and df_dep = {0:d}'
+      .format(len(hit_drudep)))
+print('resulting loss = {0:d}'
+      .format(abs(len(df_dru[depid1]) - len(df_dep[depid2]))))
+hitf = ACHorg(hit_drudep, df_eff[depid2])
+print('number of common ACH\'s found from above result and df_eff = {0:d}'
       .format(len(hitf)))
-print('loss = {0:d}\n'.format(abs(len(hitf) - len(dfEff[depid2]))))
+print('resulting = {0:d}\n'.format(abs(len(hitf) - len(df_eff[depid2]))))
 
 # convert/sort the depmap_id's to ints
 hitdict = ACHtoint(hitf)
@@ -100,24 +102,24 @@ print(hitkeys[-1])
 print('')
 
 # reduce the df's to only overlapping depmap_id's
-ordfDru = pd.DataFrame(dfDru.values.T[1:, :], columns=dfDru.values.T[0, :])
-ordfDru = ordfDru[hitkeys]
-# print(ordfDru)
-ordfDep = pd.DataFrame(dfDep.values.T[1:, :], columns=dfDep.values.T[0, :])
-ordfDep = ordfDep[hitkeys]
-# print(ordfDep)
-ordfEff = pd.DataFrame(dfEff.values.T[1:, :], columns=dfEff.values.T[0, :])
-ordfEff = ordfEff[hitkeys]
-# print(ordfEff)
+ordf_dru = pd.DataFrame(df_dru.values.T[1:, :], columns=df_dru.values.T[0, :])
+ordf_dru = ordf_dru[hitkeys]
+# print(ordf_dru)
+ordf_dep = pd.DataFrame(df_dep.values.T[1:, :], columns=df_dep.values.T[0, :])
+ordf_dep = ordf_dep[hitkeys]
+# print(ordf_dep)
+ordf_eff = pd.DataFrame(df_eff.values.T[1:, :], columns=df_eff.values.T[0, :])
+ordf_eff = ordf_eff[hitkeys]
+# print(ordf_eff)
 
-# hmmm
+# print results to file
 print('writing everything to file...')
-with open(fclSt1, 'w') as fout:
-    for i in range(len(ordfDru.iloc[0, :])):
-        outstr = (str(ordfDru.keys()[i]) + ',' + str(ordfDru.iloc[1, i])
-                  + ',' + str(ordfDru.iloc[2, i])
-                  + ' ' + str(ordfDru.iloc[3, i])
-                  + ' ' + str(ordfDru.iloc[4, i]) + '\n')
+with open(fcl_st1, 'w') as fout:
+    for i in range(len(ordf_dru.iloc[0, :])):
+        outstr = (str(ordf_dru.keys()[i]) + ',' + str(ordf_dru.iloc[1, i])
+                  + ',' + str(ordf_dru.iloc[2, i])
+                  + ' ' + str(ordf_dru.iloc[3, i])
+                  + ' ' + str(ordf_dru.iloc[4, i]) + '\n')
         fout.write(outstr)
 print('...done!\n')
 

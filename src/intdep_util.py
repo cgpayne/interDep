@@ -23,14 +23,14 @@ ddea = '../data/out_mister/'
 
 
 # data file names
-finDru = ddin + 'Drug_sensitivity_(PRISM_Repurposing_Primary_Screen)_19Q4.csv'
-finDep = ddin + 'CRISPR_gene_dependency_Chronos.csv'
-finEff = ddin + 'CRISPR_gene_effect.csv'
-feaDru = ddea + 'drug.csv'
-feaDep = ddea + 'dependency.csv'
-feaEff = ddea + 'effect.csv'
-fclSt1 = ddea + 'states_mrclean.csv'
-fsiSt2 = ddea + 'states_mrsinatra.csv'
+fin_dru = ddin + 'Drug_sensitivity_(PRISM_Repurposing_Primary_Screen)_19Q4.csv'
+fin_dep = ddin + 'CRISPR_gene_dependency_Chronos.csv'
+fin_eff = ddin + 'CRISPR_gene_effect.csv'
+fea_dru = ddea + 'drug.csv'
+fea_dep = ddea + 'dependency.csv'
+fea_eff = ddea + 'effect.csv'
+fcl_st1 = ddea + 'states_mrclean.csv'
+fsi_st2 = ddea + 'states_mrsinatra.csv'
 
 
 # ~~~ function definitions ~~~
