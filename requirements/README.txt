@@ -10,6 +10,6 @@ of which I didn't recognize.
 
 Why am I deviating from the status quo, you ask?
 In one's search for Heaven on Earth,
-we do not deserve to be stuck in Dependency Hell.
+we do not deserve to be trapped in Dependency Hell.
 
 - Charlie Payne

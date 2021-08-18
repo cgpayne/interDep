@@ -29,8 +29,8 @@ finEff = ddin + 'CRISPR_gene_effect.csv'
 feaDru = ddea + 'drug.csv'
 feaDep = ddea + 'dependency.csv'
 feaEff = ddea + 'effect.csv'
-feaSt1 = ddea + 'states_mrclean.csv'
-feaSt2 = ddea + 'states_mrsinatra.csv'
+fclSt1 = ddea + 'states_mrclean.csv'
+fsiSt2 = ddea + 'states_mrsinatra.csv'
 
 
 # ~~~ function definitions ~~~

@@ -26,7 +26,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 # from sklearn.preprocessing import StandardScaler
 
-from intdep_util import feaSt2
+from intdep_util import fsiSt2
 from intdep_util import eprint, uncsvip
 
 # input and output file names
@@ -123,34 +123,35 @@ def posifizer(alist):
 #         yy = slope*(x - x//1) + lidat[i]
 
 
-ykk, stlen = uncsvip(feaSt2)
+ykk, stlen = uncsvip(fsiSt2)
 liACH = ykk[0]
-liSta = ykk[1]
+liOrg = ykk[1]
+liCan = ykk[2]
 
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
 vec = TfidfVectorizer(stop_words=None)
-vec.fit(liSta)
+vec.fit(liCan)
 # print(len(vec.vocabulary_.keys()), [key for key in sorted(vec.vocabulary_.keys())])
-# features = vec.transform(liSta)
+# features = vec.transform(liCan)
 # print(features)
 # print('GAH')
 # print(features.toarray())
 # exit()
-# dfVoc = pd.DataFrame(vec.transform(liSta).toarray(),
+# dfVoc = pd.DataFrame(vec.transform(liCan).toarray(),
 #                      columns=sorted(vec.vocabulary_.keys()))
-# dfVoc = pd.DataFrame(vec.transform(liSta).toarray())
+# dfVoc = pd.DataFrame(vec.transform(liCan).toarray())
 # print(dfVoc)
 # print(type(dfVoc.values))
 # print(dfVoc.values.shape)
 # print('yyeeeee')
-# features = vec.transform(liSta).toarray()
+# features = vec.transform(liCan).toarray()
 # print(type(features))
 # print(features)
 # print('WTF')
 # print(np.array(features))
 # print(type(np.array(features)))
 # # print(dfVoc.keys())
-nati_states = vec.transform(liSta).toarray()
+nati_states = vec.transform(liCan).toarray()
 # exit()
 
 # made it worse!?
@@ -176,10 +177,11 @@ plt.show()
 # liRF = pca.fit_transform(dfVoc.values)  # reduced features
 # dfred_states = pd.DataFrame(liRF, columns=['x', 'y'])
 # # print(dfred_states)
-pca_new = PCA(n_components=0.33, random_state=202108)
+pca_new = PCA(n_components=2, random_state=202108)
 # liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
 nared_states = pca_new.fit_transform(nati_states)  # reduced features
-dfred_states = pd.DataFrame(nared_states)
+dfred_states = pd.DataFrame(nared_states, columns=['x', 'y'])
+# dfred_states = pd.DataFrame(nared_states)
 print(dfred_states)
 print(dfred_states.values.shape)
 print('variance captured by {0:d} = {1:.1f}%'
@@ -222,7 +224,7 @@ imin = 0.002
 imax = 0.03
 istep = 0.001
 jmin = 4
-jmax = 9
+jmax = 10
 for epi in np.arange(imin, imax+istep, istep):
     if epi == imin:
         print('x.xxx:  ', end='')
@@ -243,7 +245,7 @@ for epi in np.arange(imin, imax+istep, istep):
 
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
-dbscan = DBSCAN(eps=0.02, min_samples=6)
+dbscan = DBSCAN(eps=0.015, min_samples=6)
 dbscan.fit(dfred_states)
 dfred_states['DBSCAN_labels'] = dbscan.labels_
 
@@ -256,21 +258,43 @@ mycol = acmap(np.arange(acmap.N))
 mycol = np.concatenate(([np.array([0.3, 0.3, 0.3, 1.0])], mycol))
 # print(mycol)
 
-# plt.figure(figsize=(7, 7))
-# plt.scatter(dfred_states['x'], dfred_states['y'], c=dfred_states['DBSCAN_labels'],
-#             cmap=matplotlib.colors.ListedColormap(mycol), s=15)
-#             # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
-# plt.title('DBSCAN Clustering', fontsize=18)
-# # plt.legend(fontsize=20, loc='lower right', fancybox=False, edgecolor='black')
-# plt.colorbar(ticks=[i for i in range(-1, stlen)])
-# plt.xlabel('Feature 1', fontsize=12)
-# plt.ylabel('Feature 2', fontsize=12)
-# plt.show()
+plt.figure(figsize=(7, 7))
+plt.scatter(dfred_states['x'], dfred_states['y'], c=dfred_states['DBSCAN_labels'],
+            cmap=matplotlib.colors.ListedColormap(mycol), s=15)
+            # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
+plt.title('DBSCAN Clustering', fontsize=18)
+# plt.legend(fontsize=20, loc='lower right', fancybox=False, edgecolor='black')
+plt.colorbar(ticks=[i for i in range(-1, stlen)])
+plt.xlabel('Feature 1', fontsize=12)
+plt.ylabel('Feature 2', fontsize=12)
+plt.show()
+
+print('wtf1')
+dfnew = dfred_states[['DBSCAN_labels']]  # [['key']] -> get as a dataframe
+# dfnew.loc[:, 'Can'] = liCan  # tac on liCan (np.array(...) for numbers)
+print('wtf2')
+# dfnew.insert(1, 'Can', liCan, True)
+dfnew = pd.concat([dfnew, pd.DataFrame(liCan, columns=['Can'])], axis=1)
+# print(dfnew)
+# exit()
+print('wtf3')
+dfnew = dfnew.sort_values(by='DBSCAN_labels', ignore_index=True)
+# print(dfnew)
+# exit()
+print('wtf4')
+for i in range(dfnew.shape[0]):
+    dblab = dfnew.loc[i, 'DBSCAN_labels']
+    print('{0:2d}  {1:s}'.format(dblab, dfnew.loc[i, 'Can']))
+    if i == dfnew.shape[0]-1:
+        continue
+    if dblab == dfnew.loc[i+1, 'DBSCAN_labels'] - 1:
+        print('')
+print('wtf5')
 
 with open(foutTmp, 'w') as fout:
     for i in range(stlen):
         outstr = (liACH[i] + ',' + str(dfred_states['DBSCAN_labels'][i])
-                  + ',' + liSta[i] + '\n')
+                  + ',' + liCan[i] + '\n')
         fout.write(outstr)
 
 

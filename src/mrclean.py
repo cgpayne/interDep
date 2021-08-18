@@ -16,7 +16,7 @@
 
 import pandas as pd
 
-from intdep_util import finDru, finDep, finEff, feaDru, feaDep, feaEff, feaSt1
+from intdep_util import finDru, finDep, finEff, feaDru, feaDep, feaEff, fclSt1
 
 ldchr = 4             # to remove leading string 'ACH-' in depmap_id's
 depid1 = 'depmap_id'  # string for df keys
@@ -110,10 +110,10 @@ ordfEff = ordfEff[hitkeys]
 
 # hmmm
 print('writing everything to file...')
-with open(feaSt1, 'w') as fout:
+with open(fclSt1, 'w') as fout:
     for i in range(len(ordfDru.iloc[0, :])):
         outstr = (str(ordfDru.keys()[i]) + ',' + str(ordfDru.iloc[1, i])
-                  + ' ' + str(ordfDru.iloc[2, i])
+                  + ',' + str(ordfDru.iloc[2, i])
                   + ' ' + str(ordfDru.iloc[3, i])
                   + ' ' + str(ordfDru.iloc[4, i]) + '\n')
         fout.write(outstr)
