@@ -5,7 +5,7 @@
 #  By:  Charlie Payne
 #  License: n/a
 # DESCRIPTION
-#
+#  do a bit more tailoring on the strings describing cancer type and site
 # NOTES
 #  [none]
 # KNOWN BUGS
@@ -13,18 +13,17 @@
 # DESIRED FEATURES
 #  [none]
 
-# import csv
 import sys
 
-# import intdep_util as idu
-from intdep_util import fclSt1, fsiSt2
+from intdep_util import fcl_st1, fsi_st2
 from intdep_util import uncsvip
 
-# input and output file names
-# fclSt1 = 'data/out_mrclean/states_PI.csv'
-foutTmp = 'data/out_mister/states_mrsinatra.csv'
 
+# ~~~ function definitions ~~~
 
+# medcompound: change revelant medical words into compound words
+#  in:   alist = a list of medical words
+#  out:  alist = the same list, but with compound words connected by an _
 def medcompound(alist):
     for i in range(len(alist)):
         # HMMM (lack of domain knowledge): Antigen, Cell, Clear,
@@ -40,28 +39,41 @@ def medcompound(alist):
     return alist
 
 
-# split all the words up, account for overlaps (set), then sort
+# vocit: split all the words up, account for overlaps (set), then sort
+#  in:   alist = a list of sentences
+#  out:  a sorted list of all the words in alist (without repeats)
 def vocit(alist):
     return sorted(set(word for sentence in alist for word in sentence.split()))
 
 
-ykk, stlen = uncsvip(fclSt1)
-liACH = ykk[0]
-liOrg = ykk[1]
-liCan = ykk[2]
+# --------- execute the code ---------
 
-vocabi = vocit(liCan)
-print(len(vocabi), vocabi)
+# read in the data
+ykk, stlen = uncsvip(fcl_st1)
+li_ACH = ykk[0]     # the ACH-depmap_id's
+li_sites = ykk[1]   # the corresponding cancer sites
+li_cancer = ykk[2]  # the corresponding cancers
 
-liOrg = medcompound(liOrg)
-liCan = medcompound(liCan)
+# collapse into words, then convert them with medcompound, and print
+vocabi = vocit(li_cancer)
+print('-- initial vocabulary --')
+print(vocabi)
+print('length =', len(vocabi))
+print('')
 
-vocabf = vocit(liCan)
-print(len(vocabf), vocabf)
+li_sites = medcompound(li_sites)
+li_cancer = medcompound(li_cancer)
 
-with open(fsiSt2, 'w') as fout:
+vocabf = vocit(li_cancer)
+print('-- converted vocabulary --')
+print(vocabf)
+print('length =', len(vocabf))
+print('')
+
+# print the results to file
+with open(fsi_st2, 'w') as fout:
     for i in range(stlen):
-        fout.write(liACH[i] + ',' + liOrg[i] + ',' + liCan[i] + '\n')
+        fout.write(li_ACH[i] + ',' + li_sites[i] + ',' + li_cancer[i] + '\n')
 fout.close()
 
 
