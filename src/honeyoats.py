@@ -7,19 +7,18 @@
 # DESCRIPTION
 #  not sure yet
 # NOTES
-#  -- it seems that scaling the TI-FIDF data worsens the PCA
+#  -- it seems that scaling the TI-FIDF data worsens the PCA, hmm...
+#  -- I fear the clustering has become no more advantageous than grep
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
-#  -- somehow split the state strings?
+#  [none]
 
-# import csv
 import sys
 
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib
-# from matplotlib import cm
 import pandas as pd
 from scipy.signal import savgol_filter
 from sklearn.cluster import DBSCAN
@@ -28,27 +27,16 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.neighbors import NearestNeighbors
 # from sklearn.preprocessing import StandardScaler
 
-from intdep_util import fsiSt2
+from intdep_util import fsi_st2, fho_stf
 from intdep_util import eprint, uncsvip
 
-# input and output file names
-foutTmp = 'tmp.o'
 
+# ~~~ function definitions ~~~
 
-# def uncsvip(filename):
-#     with open(filename, 'r', newline='\n') as fin:
-#         reader = csv.reader(fin)
-#         indata = list(reader)
-#     fin.close()
-#     lefty = []
-#     righty = []
-#     dlen = len(indata)
-#     for i in range(dlen):
-#         lefty.append(indata[i][0])
-#         righty.append(indata[i][1])
-#     return lefty, righty, dlen
-
-
+# labtally: make a tally of a label's appearance in a list
+#  in:   labels = a list of (repeating) labels,
+#        check = the label to check for in the tally
+#  out:  count = the number of times <check> appeared in <labels>
 def labtally(labels, check):
     count = 0
     for i in range(len(labels)):
@@ -57,7 +45,13 @@ def labtally(labels, check):
     return count
 
 
-def secordcen(i, fndat, di):
+# secordcen: take a second order derivative using a central finite difference
+#  in:   fndat = a list of floats representing a function
+#        i = the index to centre the differentiation on
+#        di = the spacing of the finite difference
+#  out:  the central second order finite difference of <fndat> at <i> by <di>
+def secordcen(fndat, i, di):
+    # parse the input: i must range from 1 to -2 (python indexing)
     if i < 1:
         eprint('ERROR 041: i is too low!')
         eprint('i =', i)
@@ -69,6 +63,7 @@ def secordcen(i, fndat, di):
         eprint('exiting...')
         sys.exit(1)
     else:
+        # calculate the finite difference
         slopeL = fndat[i] - fndat[i-1]  # run = i - (i-1) = 1
         yyL = fndat[i] - slopeL*di
         slopeR = fndat[i+1] - fndat[i]  # run = (i+1) - i = 1
@@ -76,56 +71,19 @@ def secordcen(i, fndat, di):
         return (yyR - 2*fndat[i] + yyL)/di**2
 
 
-def posifizer(alist):
+# nonnegz: zero all negative elements of a list of floats
+#  in:   alist = a list of floats
+#  out:  alist = the same list, but with x -> 0 for all x < 0
+def nonnegz(alist):
     for i in range(len(alist)):
         if alist[i] < 0:
             alist[i] = 0
     return alist
 
 
-# # in:   X = real value, Xdat = array of ordered real values, Xlen = length of Xdat
-# # out:  i = i-th place, where X can be found between Xdat[i] and Xdat[i+1] (left justified), via bisection method
-# #           if X is too far left => return 'L', if X is too far right => return 'R'
-# def iXfind(X, Xdat):
-#   Xlen = len(Xdat)
-#   if X < Xdat[0]:
-#     i = 'L'
-#   elif Xdat[Xlen-1] == X:
-#     i = Xlen-2  # close off the right-most bracket, for completeness
-#   elif Xdat[Xlen-1] < X:
-#     i = 'R'
-#   else:
-#     a = 0
-#     c = Xlen-1
-#     hit = 0
-#     while hit == 0:
-#       b = (a + c)/2
-#       if (Xdat[a] <= X) and (X < Xdat[b]):  # it's in the left bracket
-#         if a == b-1:
-#           i = a  # left justified
-#           hit = 1
-#         else:
-#           c = b
-#       else:  # it's in the right bracket
-#         if b == c-1:
-#           i = b  # left justified
-#           hit = 1
-#         else:
-#           a = b
-#   return i
-#
-#
-# def trapdat(x, lidat):
-#     i = iXfind(x, lidat)
-#     yy = 0
-#     if i != 'L' and i != 'R':
-#         # slope = (lidat[i+1] - lidat[i])/(Nvec[i+1] - Nvec[i])
-#         slope = (lidat[i+1] - lidat[i])
-#         # yy = slope*(N - Nvec[i]) + lidat[i]
-#         yy = slope*(x - x//1) + lidat[i]
+# --------- execute the code ---------
 
-
-ykk, stlen = uncsvip(fsiSt2)
+ykk, stlen = uncsvip(fsi_st2)
 liACH = ykk[0]
 liOrg = ykk[1]
 liCan = ykk[2]
@@ -204,10 +162,10 @@ distances = savgol_filter(distances, 11, 3)
 print(distances)
 print(len(distances))
 for i in range(390, 447):
-    print(i, secordcen(i, distances, 1e-2))
+    print(i, secordcen(distances, i, 1e-2))
 # lolz = max([secordcen(i, distances) for i in range(1, 447)])
 # print(lolz, int(np.where(distances == lolz)[0]))
-ohmahgawd = posifizer([secordcen(i, distances, 1e-2) for i in range(1, 447)])
+ohmahgawd = nonnegz([secordcen(distances, i, 1e-2) for i in range(1, 447)])
 ohmahgawd.insert(0, 0.0)
 ohmahgawd.append(0)
 print(ohmahgawd)
@@ -293,7 +251,7 @@ for i in range(dfnew.shape[0]):
         print('')
 print('wtf5')
 
-with open(foutTmp, 'w') as fout:
+with open(fho_stf, 'w') as fout:
     for i in range(stlen):
         outstr = (liACH[i] + ',' + str(dfred_states['DBSCAN_labels'][i])
                   + ',' + liCan[i] + '\n')

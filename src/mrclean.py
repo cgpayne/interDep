@@ -21,6 +21,7 @@ import pandas as pd
 from intdep_util import fin_dru, fin_dep, fin_eff
 from intdep_util import fea_dru, fea_dep, fea_eff, fcl_st1
 
+
 ldchr = 4             # to remove leading string 'ACH-' in depmap_id's
 depid1 = 'depmap_id'  # string for df keys
 depid2 = 'DepMap_ID'  # alt -^-
@@ -29,7 +30,7 @@ depid2 = 'DepMap_ID'  # alt -^-
 # ~~~ function definitions ~~~
 
 # ACHorg: check for mutually exlusive ACH-depmap_id's
-#  in:   listA = a list of ACH-depmap_id's
+#  in:   listA = a list of ACH-depmap_id's,
 #        listB = a different list of ACH-depmap_id's
 #  out:  answer = a list of common ACH-depmap_id's
 def ACHorg(listA, listB):
