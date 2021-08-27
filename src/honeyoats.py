@@ -9,6 +9,7 @@
 # NOTES
 #  -- it seems that scaling the TI-FIDF data worsens the PCA, hmm...
 #  -- I fear the clustering has become no more advantageous than grep
+#  -- taking less variance from the PCA seems to cluster "better" for this
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
@@ -29,6 +30,10 @@ from sklearn.neighbors import NearestNeighbors
 
 from intdep_util import fsi_st2, fho_stf
 from intdep_util import eprint, uncsvip
+
+
+seedpca = 202108  # random seed for PCA if svd_solver='auto' -> 'arpack'/etc
+npca = 2          # n(PCA) = << # of components OR % of variance >>
 
 
 # ~~~ function definitions ~~~
@@ -83,49 +88,28 @@ def nonnegz(alist):
 
 # --------- execute the code ---------
 
+# read in the data
 ykk, stlen = uncsvip(fsi_st2)
-liACH = ykk[0]
-liOrg = ykk[1]
-liCan = ykk[2]
+li_ACH = ykk[0]     # the ACH-depmap_id's
+li_sites = ykk[1]   # the corresponding cancer sites
+li_cancer = ykk[2]  # the corresponding cancers
 
+# run a Term Frequency–Inverse Document Frequency (TF-IDF) on <li_cancer>
 # relevant formulae for TF-IDF in: https://en.wikipedia.org/wiki/Tf–idf
 vec = TfidfVectorizer(stop_words=None)
-vec.fit(liCan)
-# print(len(vec.vocabulary_.keys()), [key for key in sorted(vec.vocabulary_.keys())])
-# features = vec.transform(liCan)
-# print(features)
-# print('GAH')
-# print(features.toarray())
-# sys.exit()
-# dfVoc = pd.DataFrame(vec.transform(liCan).toarray(),
-#                      columns=sorted(vec.vocabulary_.keys()))
-# dfVoc = pd.DataFrame(vec.transform(liCan).toarray())
-# print(dfVoc)
-# print(type(dfVoc.values))
-# print(dfVoc.values.shape)
-# print('yyeeeee')
-# features = vec.transform(liCan).toarray()
-# print(type(features))
-# print(features)
-# print('WTF')
-# print(np.array(features))
-# print(type(np.array(features)))
-# # print(dfVoc.keys())
-nati_states = vec.transform(liCan).toarray()
-# sys.exit()
+vec.fit(li_cancer)
+npti_cancer = vec.transform(li_cancer).toarray()  # TF-IDF = 'ti'
 
-# made it worse!?
+# scale the data -- made it worse!?
 # scaler = StandardScaler()
-# scaler.fit(nati_states)
-# natisc_states = scaler.transform(nati_states)
-# print(natisc_states)
-# # print(scX.shape)
+# scaler.fit(npti_cancer)
+# nptisc_cancer = scaler.transform(npti_cancer)
+# print(nptisc_cancer)
 
-# check the running of the PCA!
-pca_tot = PCA(n_components=None, random_state=202108)
-# pca_tot.fit_transform(dfVoc.values)
-pca_tot.fit_transform(nati_states)
-print('variance captured by total = {0:.1f}'
+# check the running of the Principal Component Analysis (PCA)!
+pca_tot = PCA(n_components=None, random_state=seedpca)
+pca_tot.fit_transform(npti_cancer)
+print('variance captured by total PCA = {0:.1f}'
       .format(100*sum(pca_tot.explained_variance_ratio_)))
 plt.plot(np.cumsum(pca_tot.explained_variance_ratio_))
 plt.xlabel('number of components')
@@ -133,27 +117,22 @@ plt.ylabel('captured variance')
 plt.show()
 # sys.exit()
 
-# pca = PCA(n_components=2, random_state=202108)
-# liRF = pca.fit_transform(dfVoc.values)  # reduced features
-# dfred_states = pd.DataFrame(liRF, columns=['x', 'y'])
-# # print(dfred_states)
-pca_new = PCA(n_components=2, random_state=202108)
-# liRF = pca_new.fit_transform(dfVoc.values)  # reduced features
-nared_states = pca_new.fit_transform(nati_states)  # reduced features
-dfred_states = pd.DataFrame(nared_states, columns=['x', 'y'])
-# dfred_states = pd.DataFrame(nared_states)
-print(dfred_states)
-print(dfred_states.values.shape)
+# do the PCA for n_components = npca
+pca_new = PCA(n_components=npca, random_state=seedpca)  # HERE!
+nprf_cancer = pca_new.fit_transform(npti_cancer)  # reduced features
+dfrf_cancer = pd.DataFrame(nprf_cancer, columns=['x', 'y'])
+print(dfrf_cancer)
+print(dfrf_cancer.values.shape)
 print('variance captured by {0:d} = {1:.1f}%'
-      .format(dfred_states.values.shape[1],
+      .format(dfrf_cancer.values.shape[1],
               100*sum(pca_new.explained_variance_ratio_)))
-# sys.exit()
+sys.exit()
 
 # should maybe test this?
 # https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
 neigh = NearestNeighbors(n_neighbors=2)
-nbrs = neigh.fit(dfred_states)
-distances, indices = nbrs.kneighbors(dfred_states)
+nbrs = neigh.fit(dfrf_cancer)
+distances, indices = nbrs.kneighbors(dfrf_cancer)
 
 distances = np.sort(distances, axis=0)
 # distances = list(distances[:, 1])  # HMMM...
@@ -195,7 +174,7 @@ for epi in np.arange(imin, imax+istep, istep):
             print(msj, end='\t\t')
             continue
         dbscan = DBSCAN(eps=epi, min_samples=msj)
-        dbscan.fit(dfred_states)
+        dbscan.fit(dfrf_cancer)
         print('({0:d}, {1:d})'.format(max(dbscan.labels_) + 1,
               labtally(dbscan.labels_, -1)), end='\t')
         # print('{'+str(msj)+'}= '+str(max(dbscan.labels_) + 1), end='\t')
@@ -206,10 +185,10 @@ for epi in np.arange(imin, imax+istep, istep):
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
 dbscan = DBSCAN(eps=0.015, min_samples=6)
-dbscan.fit(dfred_states)
-dfred_states['DBSCAN_labels'] = dbscan.labels_
+dbscan.fit(dfrf_cancer)
+dfrf_cancer['DBSCAN_labels'] = dbscan.labels_
 
-print(dfred_states)
+print(dfrf_cancer)
 
 # mycol = ['gray', 'red', 'green', 'blue']
 # mycol = ['gray', 'red', 'orange', 'green', 'blue', 'indigo', 'violet']
@@ -219,7 +198,7 @@ mycol = np.concatenate(([np.array([0.3, 0.3, 0.3, 1.0])], mycol))
 # print(mycol)
 
 plt.figure(figsize=(7, 7))
-plt.scatter(dfred_states['x'], dfred_states['y'], c=dfred_states['DBSCAN_labels'],
+plt.scatter(dfrf_cancer['x'], dfrf_cancer['y'], c=dfrf_cancer['DBSCAN_labels'],
             cmap=matplotlib.colors.ListedColormap(mycol), s=15)
             # cmap=matplotlib.colors.ListedColormap(mycol), s=15)
 plt.title('DBSCAN Clustering', fontsize=18)
@@ -230,11 +209,11 @@ plt.ylabel('Feature 2', fontsize=12)
 plt.show()
 
 print('wtf1')
-dfnew = dfred_states[['DBSCAN_labels']]  # [['key']] -> get as a dataframe
-# dfnew.loc[:, 'Can'] = liCan  # tac on liCan (np.array(...) for numbers)
+dfnew = dfrf_cancer[['DBSCAN_labels']]  # [['key']] -> get as a dataframe
+# dfnew.loc[:, 'Can'] = li_cancer  # tac on li_cancer (np.array(...) for numbers)
 print('wtf2')
-# dfnew.insert(1, 'Can', liCan, True)
-dfnew = pd.concat([dfnew, pd.DataFrame(liCan, columns=['Can'])], axis=1)
+# dfnew.insert(1, 'Can', li_cancer, True)
+dfnew = pd.concat([dfnew, pd.DataFrame(li_cancer, columns=['Can'])], axis=1)
 # print(dfnew)
 # sys.exit()
 print('wtf3')
@@ -253,8 +232,8 @@ print('wtf5')
 
 with open(fho_stf, 'w') as fout:
     for i in range(stlen):
-        outstr = (liACH[i] + ',' + str(dfred_states['DBSCAN_labels'][i])
-                  + ',' + liCan[i] + '\n')
+        outstr = (li_ACH[i] + ',' + str(dfrf_cancer['DBSCAN_labels'][i])
+                  + ',' + li_cancer[i] + '\n')
         fout.write(outstr)
 
 
