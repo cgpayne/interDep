@@ -13,7 +13,7 @@
 # KNOWN BUGS
 #  [none]
 # DESIRED FEATURES
-#  [none]
+#  -- put notes in for relevant tutorials
 
 import sys
 
@@ -35,6 +35,8 @@ from intdep_util import eprint, uncsvip
 seedpca = 202108  # random seed for PCA if svd_solver='auto' -> 'arpack'/etc
 npca = 2          # n(PCA) = << # of components OR % of variance >>
 
+soch = 15         # the spacing for executing secordcen
+
 
 # ~~~ function definitions ~~~
 
@@ -53,27 +55,28 @@ def labtally(labels, check):
 # secordcen: take a second order derivative using a central finite difference
 #  in:   fndat = a list of floats representing a function
 #        i = the index to centre the differentiation on
-#        di = the spacing of the finite difference
+#        di = the spacing of the finite difference (ceils to nearest integer)
 #  out:  the central second order finite difference of <fndat> at <i> by <di>
 def secordcen(fndat, i, di):
-    # parse the input: i must range from 1 to -2 (python indexing)
-    if i < 1:
+    # parse the input: take the ceiling of di
+    di = int(-(-di//1))
+    # parse the input: i must range from di to -1-di (python indexing)
+    if i < di:
         eprint('ERROR 041: i is too low!')
-        eprint('i =', i)
+        eprint('i  =', i)
+        eprint('di =', di)
         eprint('exiting...')
         sys.exit(1)
-    elif i >= len(fndat)-1:
+    elif i >= len(fndat)-di:
         eprint('ERROR 052: i is too high!')
-        eprint('i =', i)
+        eprint('i          =', i)
+        eprint('di         =', di)
+        eprint('len(fndat) =', len(fndat))
         eprint('exiting...')
         sys.exit(1)
     else:
         # calculate the finite difference
-        slopeL = fndat[i] - fndat[i-1]  # run = i - (i-1) = 1
-        yyL = fndat[i] - slopeL*di
-        slopeR = fndat[i+1] - fndat[i]  # run = (i+1) - i = 1
-        yyR = slopeR*di + fndat[i]
-        return (yyR - 2*fndat[i] + yyL)/di**2
+        return (fndat[i+di] - 2*fndat[i] + fndat[i-di])/di**2
 
 
 # nonnegz: zero all negative elements of a list of floats
@@ -118,7 +121,7 @@ plt.show()
 # sys.exit()
 
 # do the PCA for n_components = npca
-pca_new = PCA(n_components=npca, random_state=seedpca)  # HERE!
+pca_new = PCA(n_components=npca, random_state=seedpca)
 nprf_cancer = pca_new.fit_transform(npti_cancer)  # reduced features
 dfrf_cancer = pd.DataFrame(nprf_cancer, columns=['x', 'y'])
 print(dfrf_cancer)
@@ -126,7 +129,6 @@ print(dfrf_cancer.values.shape)
 print('variance captured by {0:d} = {1:.1f}%'
       .format(dfrf_cancer.values.shape[1],
               100*sum(pca_new.explained_variance_ratio_)))
-sys.exit()
 
 # should maybe test this?
 # https://stackabuse.com/k-nearest-neighbors-algorithm-in-python-and-scikit-learn/
@@ -135,21 +137,21 @@ nbrs = neigh.fit(dfrf_cancer)
 distances, indices = nbrs.kneighbors(dfrf_cancer)
 
 distances = np.sort(distances, axis=0)
-# distances = list(distances[:, 1])  # HMMM...
-distances = np.array(distances[:, 1])  # HMMM...
+distances = np.array(distances[:, 1])
 distances = savgol_filter(distances, 11, 3)
-print(distances)
-print(len(distances))
-for i in range(390, 447):
-    print(i, secordcen(distances, i, 1e-2))
-# lolz = max([secordcen(i, distances) for i in range(1, 447)])
-# print(lolz, int(np.where(distances == lolz)[0]))
-ohmahgawd = nonnegz([secordcen(distances, i, 1e-2) for i in range(1, 447)])
-ohmahgawd.insert(0, 0.0)
-ohmahgawd.append(0)
+socm = len(distances) - soch
+# print(distances[390:448])
+# print(len(distances))
+for i in range(390, socm):
+    print(i, secordcen(distances, i, soch))
+ohmahgawd = nonnegz([secordcen(distances, i, soch) for i in range(soch, socm)])
+for i in range(soch):
+    ohmahgawd.insert(0, 0.0)
+    ohmahgawd.append(0)
 print(ohmahgawd)
 dmax, di = max((dmax, di) for (di, dmax) in enumerate(ohmahgawd))
 print(dmax, di)
+exit()  # HERE
 plt.figure(figsize=(7, 7))
 plt.plot(distances)
 plt.title('K-distance Graph', fontsize=18)
@@ -180,7 +182,7 @@ for epi in np.arange(imin, imax+istep, istep):
         # print('{'+str(msj)+'}= '+str(max(dbscan.labels_) + 1), end='\t')
         # print('{\{0:d\}}= {1:d}'.format(msj, max(dbscan.labels_) + 1), end=',')
     print('')
-# sys.exit()
+sys.exit()
 
 # (6, 4), (7, 5), (8, 6), ...
 # dbscan = DBSCAN(eps=0.008, min_samples=6)  # pretty good!
